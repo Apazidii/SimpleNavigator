@@ -1,0 +1,19 @@
+graph graphname {
+	a;
+	b;
+	c;
+	d;
+	e;
+	f;
+	g;
+	h;
+	i;
+	a -- b;
+	a -- g;
+	b -- c;
+	b -- d;
+	b -- e;
+	e -- f;
+	g -- h;
+	h -- i;
+}

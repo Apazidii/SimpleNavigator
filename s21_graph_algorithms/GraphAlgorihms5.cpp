@@ -110,8 +110,9 @@ TsmResult s21::GraphAlgorithms::solveTSP(const std::vector<std::vector<int>>& gr
   return res;
 }
 
-bool s21::GraphAlgorithms::checkFullGraph(std::vector<std::vector<int>> mat) {
-    int s = (int) mat.size();
+bool s21::GraphAlgorithms::checkFullGraph(s21::Graph &graph) {
+    int s = graph.getSize();
+    int **mat = graph.getMatrix();
 
     for (int i = 0; i < s; i++) {
         for (int j = 0; j < s; j++) {
@@ -126,6 +127,10 @@ bool s21::GraphAlgorithms::checkFullGraph(std::vector<std::vector<int>> mat) {
 TsmResult s21::GraphAlgorithms::solveTravelingSalesmanProblem3(s21::Graph &graph) {
 
     std::vector<std::vector<int>> mat;
+    TsmResult res;
+    res.distance = 0;
+    if (!checkFullGraph(graph))
+      return res;
     int **matrix = graph.getMatrix();
     int s = graph.getSize();
 
@@ -137,8 +142,10 @@ TsmResult s21::GraphAlgorithms::solveTravelingSalesmanProblem3(s21::Graph &graph
         mat.push_back(vec);
     }
 
-    if (!checkFullGraph(mat))
-        return TsmResult();
-
-    return solveTSP(mat);
+    
+    res = solveTSP(mat);
+    for (size_t i = 0; i < res.vertices.size(); i++) {
+      res.vertices[i]++;
+    }
+    return res;
 }

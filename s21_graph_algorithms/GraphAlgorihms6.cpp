@@ -7,7 +7,7 @@
 const int INF = std::numeric_limits<int>::max();
 
 void s21::GraphAlgorithms::recursiveTSM2(const std::vector<std::vector<int>>& graph, std::vector<int>& path, std::vector<bool>& visited, int current, int n, int cost, int& minCost, std::vector<int>& minPath) {
-  if (n == graph.size() && graph[current][0] != INF) {
+  if (n == (int) graph.size() && graph[current][0] != INF) {
     // Все вершины посещены, обновляем минимальный путь и стоимость
     cost += graph[current][0];
     if (cost < minCost) {
@@ -17,7 +17,7 @@ void s21::GraphAlgorithms::recursiveTSM2(const std::vector<std::vector<int>>& gr
     return;
   }
 
-  for (int i = 0; i < graph.size(); ++i) {
+  for (int i = 0; i < (int) graph.size(); ++i) {
     if (!visited[i] && graph[current][i] != INF) {
       visited[i] = true;
       path[n] = i;
@@ -30,9 +30,8 @@ void s21::GraphAlgorithms::recursiveTSM2(const std::vector<std::vector<int>>& gr
 }
 
 TsmResult s21::GraphAlgorithms::solveTravelingSalesmanProblem2(s21::Graph &g) {
-    int n;
-    g.loadGraphFromFile("./file_examples/1");
-    n = g.getSize();
+
+    int n = g.getSize();
     int **mat = g.getMatrix();
 
     std::vector<std::vector<int>> graph(n, std::vector<int>(n));

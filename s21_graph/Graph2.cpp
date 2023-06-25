@@ -5,7 +5,8 @@
 
 void s21::Graph::loadGraphFromFile(std::string filename) {
     std::ifstream file(filename);
-    
+    if (init)
+        freeMatrix();
     if (!file.is_open()) {
         std::cout << "Не удалось открыть файл." << std::endl;
         matrix = nullptr;

@@ -8,6 +8,8 @@ SOURCES = 	./s21_graph/Graph.cpp						\
 			./s21_graph_algorithms/GraphAlgorihms2.cpp	\
 			./s21_graph_algorithms/GraphAlgorihms3.cpp	\
 			./s21_graph_algorithms/GraphAlgorihms4.cpp	\
+			./s21_graph_algorithms/GraphAlgorihms5.cpp	\
+			./s21_graph_algorithms/GraphAlgorihms6.cpp	\
 			./UI/main.cpp
 
 

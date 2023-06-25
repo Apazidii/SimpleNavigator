@@ -28,6 +28,14 @@ namespace s21 {
             int getRandomIndex(const std::vector<double>& probabilities);
             void updatePhero(double **phero, Ant &ant, int s);
             bool edgeInVec(std::vector<int> vec, int a, int b);
+            bool checkFullGraph(std::vector<std::vector<int>> mat);
+
+            TsmResult solveTSP(const std::vector<std::vector<int>>& graph);
+            int calculateLowerBound(const std::vector<std::vector<int>>& graph, const std::vector<bool>& visited, int currCity);
+
+
+        private:
+            void recursiveTSM2(const std::vector<std::vector<int>>& graph, std::vector<int>& path, std::vector<bool>& visited, int current, int n, int cost, int& minCost, std::vector<int>& minPath);
 
         public:
             //part1
@@ -40,6 +48,10 @@ namespace s21 {
             int **getLeastSpanningTree(Graph &graph);
             //part4
             TsmResult solveTravelingSalesmanProblem(Graph &graph);
+
+            //part6
+            TsmResult solveTravelingSalesmanProblem2(Graph &graph);
+            TsmResult solveTravelingSalesmanProblem3(Graph &graph);
 
         //part4 options
         private:

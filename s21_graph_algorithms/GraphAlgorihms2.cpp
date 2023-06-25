@@ -5,7 +5,6 @@ bool s21::GraphAlgorithms::isINF(int **mat, int i, int j) {
     return (mat[i][j] == 0 && i != j);
 }
 
-
 int s21::GraphAlgorithms::getShortestPathBetweenVertices(Graph &graph, int vertex1, int vertex2) {
     vertex1--;
     vertex2--;

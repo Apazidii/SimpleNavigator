@@ -109,6 +109,8 @@ TsmResult s21::GraphAlgorithms::solveTravelingSalesmanProblem(Graph &graph) {
     }
     delete[] pheroMap;
     delete[] visits;
+    for (size_t i = 0; i < ant.vertices.size(); i++)
+        ant.vertices[i] += 1;
     return ant;
 }
 

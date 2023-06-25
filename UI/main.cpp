@@ -16,15 +16,17 @@
 
 
 void help() {
-    std::cout << GREEN << "help" << RESET << " - " << YELLOW << "Вывод всех доступных комманд" << RESET << std::endl;
-    std::cout << GREEN << "exit" << RESET << " - " << YELLOW << "Выход из команды" << RESET << std::endl;
-    std::cout << GREEN << "load" << RESET << " - " << YELLOW << "Загрузка графа из файла" << RESET << std::endl;
-    std::cout << GREEN << "DFS" << RESET << " - " << YELLOW << "Обход графа в глубину" << RESET << std::endl;
-    std::cout << GREEN << "BFS" << RESET << " - " << YELLOW << "Обход графа в ширину" << RESET << std::endl;
-    std::cout << GREEN << "min2" << RESET << " - " << YELLOW << "Поиск минимального расстояния между двумя вершинами" << RESET << std::endl;
-    std::cout << GREEN << "minAll" << RESET << " - " << YELLOW << "Поиск минимального расстояния между всеми вершинами" << RESET << std::endl;
-    std::cout << GREEN << "minTree" << RESET << " - " << YELLOW << "Поиск минимального островного дерева" << RESET << std::endl;
-    std::cout << GREEN << "TSM" << RESET << " - " << YELLOW << "Решение задачи комивояжера" << RESET << std::endl;
+    std::cout << GREEN << "help"    << RESET << "\t-\t" << YELLOW << "Вывод всех доступных комманд" << RESET << std::endl;
+    std::cout << GREEN << "exit"    << RESET << "\t-\t" << YELLOW << "Выход из команды" << RESET << std::endl;
+    std::cout << GREEN << "load"    << RESET << "\t-\t" << YELLOW << "Загрузка графа из файла" << RESET << std::endl;
+    std::cout << GREEN << "DFS"     << RESET << "\t-\t" << YELLOW << "Обход графа в глубину" << RESET << std::endl;
+    std::cout << GREEN << "BFS"     << RESET << "\t-\t" << YELLOW << "Обход графа в ширину" << RESET << std::endl;
+    std::cout << GREEN << "min2"    << RESET << "\t-\t" << YELLOW << "Поиск минимального расстояния между двумя вершинами" << RESET << std::endl;
+    std::cout << GREEN << "minAll"  << RESET << "\t-\t" << YELLOW << "Поиск минимального расстояния между всеми вершинами" << RESET << std::endl;
+    std::cout << GREEN << "minTree" << RESET << "\t-\t" << YELLOW << "Поиск минимального островного дерева" << RESET << std::endl;
+    std::cout << GREEN << "TSM"     << RESET << "\t-\t" << YELLOW << "Решение задачи комивояжера методом муравьиного алгоритма" << RESET << std::endl;
+    std::cout << GREEN << "TSM2"    << RESET << "\t-\t" << YELLOW << "Решение задачи комивояжера методом полного перебора" << RESET << std::endl;
+    std::cout << GREEN << "TSM3"    << RESET << "\t-\t" << YELLOW << "Решение задачи комивояжера методом ветвей и границ (работает только для полного графа)" << RESET << std::endl;
 
 
 }
@@ -174,6 +176,44 @@ void TSM(s21::Graph &graph) {
     std::cout << GREEN << res.distance << RESET << std::endl;
 }
 
+void TSM2(s21::Graph &graph) {
+    if (!graph.init) {
+        std::cout << RED << "Требуется загрузить граф" << RESET << std::endl;
+        return ;
+    }
+    s21::GraphAlgorithms ga;
+    TsmResult res = ga.solveTravelingSalesmanProblem2(graph);
+    std::cout << MAGENTA << "Решение задачи комивояжера" << RESET << std::endl;
+    std::cout << MAGENTA << "Маршрут:" << RESET << std::endl;
+    for (int number : res.vertices) {
+        std::cout << GREEN << number << " ";
+    }
+    std::cout << std::endl;
+    std::cout << MAGENTA << "Длина:" << RESET << std::endl;
+    std::cout << GREEN << res.distance << RESET << std::endl;
+}
+
+void TSM3(s21::Graph &graph) {
+    if (!graph.init) {
+        std::cout << RED << "Требуется загрузить граф" << RESET << std::endl;
+        return ;
+    }
+    s21::GraphAlgorithms ga;
+    TsmResult res = ga.solveTravelingSalesmanProblem3(graph);
+    if (res.distance == 0.0) {
+        std::cout << RED << "Граф должен быть полным" << RESET << std::endl;
+        return ;
+    }
+    std::cout << MAGENTA << "Решение задачи комивояжера" << RESET << std::endl;
+    std::cout << MAGENTA << "Маршрут:" << RESET << std::endl;
+    for (int number : res.vertices) {
+        std::cout << GREEN << number << " ";
+    }
+    std::cout << std::endl;
+    std::cout << MAGENTA << "Длина:" << RESET << std::endl;
+    std::cout << GREEN << res.distance << RESET << std::endl;
+}
+
 int main() {
     std::string cmd;
 
@@ -201,5 +241,9 @@ int main() {
             minTree(graph);
         if (cmd == "TSM")
             TSM(graph);
+        if (cmd == "TSM2")
+            TSM2(graph);
+        if (cmd == "TSM3")
+            TSM3(graph);
     }
 }

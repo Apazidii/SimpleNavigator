@@ -19,7 +19,7 @@ int s21::GraphAlgorithms::getShortestPathBetweenVertices(Graph &graph, int verte
 
     int *longWays = new int[s];
     for (int i = 0; i < s; i++)
-        longWays[i] = 0;
+        longWays[i] = -2;
 
     while (cont.size() != 0)
     {
@@ -30,7 +30,7 @@ int s21::GraphAlgorithms::getShortestPathBetweenVertices(Graph &graph, int verte
         
         for (int i = 0; i < s; i++) {
             if (nextNodes[i] != 0 && !visits[i]) {
-                if (longWays[i] == 0 || longWays[i] > longWays[node] + nextNodes[i])
+                if (longWays[i] == -2 || longWays[i] > longWays[node] + nextNodes[i])
                     longWays[i] = longWays[node] + nextNodes[i];
                 cont.push(i);
             }

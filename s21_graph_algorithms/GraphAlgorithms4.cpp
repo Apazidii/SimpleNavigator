@@ -9,6 +9,15 @@ bool s21::GraphAlgorithms::edgeInVec(std::vector<int> vec, int a, int b) {
     return false;
 }
 
+bool s21::GraphAlgorithms::checkConnectedGraph(s21::Graph &graph) {
+    int s = graph.getSize();
+    for (int i = 0; i < s; i++) {
+        std::vector<int> res = depthFirstSearch(graph, i + 1);
+        if ((int) res.size() != s)
+            return false;
+    }
+    return true;
+}
 
 
 int s21::GraphAlgorithms::getRandomIndex(const std::vector<double>& probabilities) {
@@ -65,6 +74,10 @@ void s21::GraphAlgorithms::startAntJourney(Ant &ant, Graph &graph, double**phero
 
 
 TsmResult s21::GraphAlgorithms::solveTravelingSalesmanProblem(Graph &graph) {
+    Ant ant;
+    ant.distance = 0;
+    if (!checkConnectedGraph(graph))
+        return ant;
     int s = graph.getSize();
     double **pheroMap = new double*[s];
     for (int i = 0; i < s; ++i) {
@@ -81,7 +94,7 @@ TsmResult s21::GraphAlgorithms::solveTravelingSalesmanProblem(Graph &graph) {
 
 
 
-    Ant ant;
+    
     int start;
     for (int i = 0; i < antCount; i++) {
         start = rand() % s;
@@ -113,5 +126,3 @@ TsmResult s21::GraphAlgorithms::solveTravelingSalesmanProblem(Graph &graph) {
         ant.vertices[i] += 1;
     return ant;
 }
-
-

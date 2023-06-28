@@ -31,6 +31,7 @@ namespace s21 {
 
             TsmResult solveTSP(const std::vector<std::vector<int>>& graph);
             int calculateLowerBound(const std::vector<std::vector<int>>& graph, const std::vector<bool>& visited, int currCity);
+            bool checkConnectedGraph(s21::Graph &graph);
 
 
         private:
@@ -55,10 +56,11 @@ namespace s21 {
             bool checkFullGraph(s21::Graph &graph);
 
 
+
         //part4 options
         private:
             double basePheromone = 1.0; // Базовое значение феромонов
-            int antCount = 100;          // Количество муравьев
+            int antCount = 200;          // Количество муравьев
             double ALPHA = 1.0;         // Влияние феромонов
             double BETA = 2.0;          // Влияние эвристической информации
             double RHO = 0.5;           // Скорость испарения феромонов

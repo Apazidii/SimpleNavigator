@@ -1,6 +1,29 @@
 #include "s21_graph.h"
 
+bool checkFileContent(std::ifstream& file)
+{
 
+
+    file.seekg(0, std::ios::beg);
+
+    std::string line;
+    while (std::getline(file, line)) {
+        std::stringstream ss(line);
+        std::string number;
+        while (std::getline(ss, number, ',')) {
+            try {
+                std::stod(number);
+            } catch (const std::exception&) {
+                return false;
+            }
+        }
+    }
+
+    file.clear();
+    file.seekg(0, std::ios::beg);
+
+    return true;
+}
 
 
 void s21::Graph::loadGraphFromFile(std::string filename) {
@@ -11,6 +34,11 @@ void s21::Graph::loadGraphFromFile(std::string filename) {
         std::cout << "Не удалось открыть файл." << std::endl;
         matrix = nullptr;
         return ;
+    }
+    if (!checkFileContent(file)) {
+        std::cout << "Файл неверного формата." << std::endl;
+        matrix = nullptr;
+        return ;  
     }
     
     // Определение размера матрицы

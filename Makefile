@@ -4,14 +4,19 @@ LIB = s21_graph.a
 SOURCES = 	./s21_graph/Graph.cpp						\
           	./s21_graph/Graph2.cpp						\
 			./s21_graph/Graph3.cpp						\
-		  	./s21_graph_algorithms/GraphAlgorihms1.cpp	\
-			./s21_graph_algorithms/GraphAlgorihms2.cpp	\
-			./s21_graph_algorithms/GraphAlgorihms3.cpp	\
-			./s21_graph_algorithms/GraphAlgorihms4.cpp	\
-			./s21_graph_algorithms/GraphAlgorihms5.cpp	\
-			./s21_graph_algorithms/GraphAlgorihms6.cpp	\
+			\
+		  	./s21_graph_algorithms/GraphAlgorithms1.cpp	\
+			./s21_graph_algorithms/GraphAlgorithms2.cpp	\
+			./s21_graph_algorithms/GraphAlgorithms3.cpp	\
+			./s21_graph_algorithms/GraphAlgorithms4.cpp	\
+			./s21_graph_algorithms/GraphAlgorithms5.cpp	\
+			./s21_graph_algorithms/GraphAlgorithms6.cpp	\
+			\
 			./UI/main.cpp								\
-			./UI/alg_cmds.cpp
+			./UI/alg_cmds.cpp							\
+			\
+			./tests/Graph_test.cpp						\
+			./tests/GraphAlgorithms_test.cpp
 
 
 
@@ -21,7 +26,7 @@ OBJS = $(addprefix $(BUILD_DIR)/, $(addsuffix .o, $(basename $(notdir $(SOURCES)
 UNAME_S := $(shell uname -s)
 
 
-CXXFLAGS = -std=c++17 -Iincludes
+CXXFLAGS = -std=c++17 -Iincludes -lgtest -lgtest_main -pthread
 CXXFLAGS += -g -Wall -Wformat 
 LIBS =
 
@@ -46,6 +51,9 @@ $(BUILD_DIR)/%.o:./UI/%.cpp
 	mkdir -p $(BUILD_DIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
+$(BUILD_DIR)/%.o:./tests/%.cpp
+	mkdir -p $(BUILD_DIR)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 
 all: $(EXE)

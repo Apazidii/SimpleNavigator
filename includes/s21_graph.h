@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <fstream>
 #include <string>
+#include <sstream>
+
 
 namespace s21 {
 
